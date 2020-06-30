@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>购物车</title>
+        
+    </head>
+    <body>
+    <!-- 宿主文件 -->
+        <div id="app">
+            <h2 :title = "title">
+            <!-- 插值文本 -->
+                {{title}}                
+            </h2>  
+            <!-- 用户输入 -->
+            <p> 
+                <input type="text" v-model="course" v-on:keydown.enter="addCourse">
+                <button @click="addCourse">新增</button>
+            </p>
+            <!-- 列表渲染 -->
+            <ul v-for="c in courses" :key="c">
+                {{ c }}
+            </ul>
+        </div>
+        <!-- 
+            操作步骤：
+            1.首先使用一个双向绑定的 语法 v-model 进行绑定 （input输入框 和 addCourse 的功能）
+            2.监听各种各样的事件：比如button的V-on:click = addCourse() 这个方法
+                可以使用keydown\keyup\keypress这些来实现，或者.enter 这种修饰符来简化过程
+         -->
+        <script src="vue.js"></script>
+        <script>
+            const app = new Vue({
+                el:'#app',
+                data(){
+                return {
+                    title:'开课吧购物车',
+                    course:'',
+                    courses:['web全栈','web高级']
+                }
+            },
+            methods: {
+                addCourse(){
+                    //1.添加course 到数组
+                    this.courses.push(this.course)
+                    //2.清空course 
+                    this.course = ''
+                }
+            },
+        })
+        </script>
+    </body>
+</html>
